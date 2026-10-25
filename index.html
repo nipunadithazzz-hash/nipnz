@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Critical Alert</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #00ff00;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            overflow: hidden;
+            padding: 20px;
+            height: 100vh;
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid #ff0000;
+            padding: 20px;
+            max-width: 500px;
+            margin: 30px auto;
+            box-shadow: 0 0 25px #ff0000;
+            text-align: center;
+        }
+
+        h1 {
+            color: #ff0000;
+            font-size: 24px;
+            animation: blink 0.5s infinite;
+        }
+
+        p {
+            color: #ffffff;
+            font-size: 15px;
+        }
+
+        .terminal {
+            text-align: left;
+            font-size: 13px;
+            color: #00ff00;
+            height: 140px;
+            overflow: hidden;
+            border: 1px dashed #00ff00;
+            padding: 10px;
+            margin-top: 15px;
+            background: #050505;
+        }
+
+        .warning-text {
+            color: #ff5555;
+            font-weight: bold;
+        }
+
+        /* Final Lock Screen Overlay */
+        #lockScreen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #300;
+            color: #ffffff;
+            z-index: 999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        #lockScreen h2 {
+            font-size: 32px;
+            color: #ff0000;
+            margin-bottom: 5px;
+            animation: blink 0.4s infinite;
+        }
+
+        .hacker-signature {
+            font-size: 36px;
+            color: #00ff00;
+            font-weight: bold;
+            margin-top: 15px;
+            text-shadow: 0 0 15px #00ff00;
+            letter-spacing: 2px;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.2; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body onclick="activatePrank();">
+
+    <div class="container" id="box">
+        <h1>⚠️ SYSTEM COMPROMISED ⚠️</h1>
+        <p class="warning-text">Nimsara's phone is hacking now...</p>
+        <p>Bypassing security protocols & copying gallery data...</p>
+        
+        <div class="terminal" id="terminal">
+            > Initializing exploit v4.2...<br>
+        </div>
+    </div>
+
+    <!-- Final Locked Screen -->
+    <div id="lockScreen">
+        <h2>💀 DEVICE LOCKED 💀</h2>
+        <p style="font-size: 16px; color: #ffcccc;">All personal files, photos, and messages have been successfully stolen.</p>
+        <div class="hacker-signature">HACKING BY NIPUNZ</div>
+        <p style="font-size: 13px; color: #888; margin-top: 30px;">System access terminated permanently.</p>
+    </div>
+
+    <!-- Background Audio -->
+    <audio id="alarm" loop>
+        <source src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg" type="audio/ogg">
+    </audio>
+
+    <script>
+        let logs = [
+            "> Connecting to remote server 185.220.101.5...",
+            "> Root access granted...",
+            "> Accessing /sdcard/DCIM/Camera...",
+            "> Stealing WhatsApp database...",
+            "> Uploading contacts and photos [██████████] 100%",
+            "> Installing malicious payload...",
+            "> Wiping device backup configuration...",
+            "> FINAL STEP: Encrypting internal storage..."
+        ];
+
+        let index = 0;
+
+        function activatePrank() {
+            // Fullscreen කරන්න
+            let elem = document.documentElement;
+            if (elem.requestFullscreen) { elem.requestFullscreen(); }
+
+            // Sound එක play කරන්න
+            let audio = document.getElementById('alarm');
+            audio.play().catch(e => console.log("Audio autoplay restricted"));
+
+            // Phone එක Vibrate කරන්න
+            if ("vibrate" in navigator) {
+                navigator.vibrate([1000, 500, 1000, 500, 2000]);
+            }
+
+            // Terminal එකට එකින් එක text වැටෙන්න සලස්වන්න
+            let timer = setInterval(() => {
+                if (index < logs.length) {
+                    let term = document.getElementById('terminal');
+                    term.innerHTML += logs[index] + "<br>";
+                    term.scrollTop = term.scrollHeight;
+                    index++;
+                } else {
+                    clearInterval(timer);
+                    // ලයින්ස් වැටිලා අවසන් වුණාම Final Lock Screen එක පෙන්වන්න
+                    setTimeout(() => {
+                        document.getElementById('lockScreen').style.display = 'flex';
+                    }, 1000);
+                }
+            }, 700);
+        }
+    </script>
+</body>
+</html>
